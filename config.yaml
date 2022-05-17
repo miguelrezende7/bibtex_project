@@ -1,0 +1,41 @@
+importation_folders:
+  bibtex_files: 'project_files/imports/bibtex_files/'
+  ranking_files: 'project_files/imports/ranking_files/'
+
+exportation_folders:
+  simple_files: 'project_files/exports/simple_files/'
+  ranking_files: 'project_files/exports/ranking_files/'
+
+supported_exportation_types: ['csv','json','yaml','xml']
+    
+exportation_type:
+  simple: 'csv'
+  ranking: 'json'
+
+supported_type_publication: ['inproceedings','article','inbook','techreport','book','proceedings','incollection']
+
+supported_type_equality: ['<=','<','==','>','>=','!=']
+
+filter_options:
+  title: ''               # text value, '' for empty
+  keywords: ['','']                           # text values, ex: ['BIG DATA', 'ANALISYS'], [''] for empty
+  abstract: ''                             # text value, '' for empty
+  year_equality: '>'                       # equality value in ['<=','<','==','>','>=','!=']
+  year: ''                             # int value, ex: 2019, '' for empty
+  type_publication: ''              # text value in ['inproceedings','article','inbook','techreport','book','proceedings','incollection'] or '' for none
+  doi: ''                                  # text value, '' for empty
+  jcr_value_equality: '>='                # equality value in ['<=','<','==','>','>=','!=']
+  jcr_value: ''                        # decimal value, ex: 343.12, '' for empty
+  scimago_value_equality: '<'            # equality value in ['<=','<','==','>','>=','!=']
+  scimago_value: ''                    # decimal value, ex: 343.12, '' for empty
+  
+    
+api_search_parameters:
+  search_words: ''
+   
+search_options:
+  source_supported_types: ['bibtex_files','api']
+  source: 'api'
+  search_words: 'BIG DATA'
+  
+ 
