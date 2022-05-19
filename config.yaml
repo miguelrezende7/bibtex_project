@@ -9,7 +9,7 @@ exportation_folders:
 supported_exportation_types: ['csv','json','yaml','xml']
     
 exportation_type:
-  simple: 'csv'
+  simple: 'xml'
   ranking: 'json'
 
 supported_type_publication: ['inproceedings','article','inbook','techreport','book','proceedings','incollection']
@@ -35,7 +35,7 @@ api_search_parameters:
    
 search_options:
   source_supported_types: ['bibtex_files','api']
-  source: 'api'
+  source: 'bibtex_files'
   search_words: 'BIG DATA'
   
  

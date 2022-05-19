@@ -26,13 +26,17 @@ class ConvertionServices():
 
 
     def convert_object_to_dict(obj_list):
+        # print(list(filter(lambda x:'Maria' in x.author, obj_list)))
         dict_list=[]
         for valor in obj_list:
             dict_list.append({'author':valor.author,'title':valor.title,'keywords':valor.keywords,'abstract':valor.abstract,'year':valor.year,'type_publication':valor.type_publication,'doi':valor.doi,'book_title':valor.book_journal})
+        
+        
         return dict_list
     
     def convert_object_to_json(obj_list):
         json_obj = json.dumps([o.dump_json() for o in obj_list], indent=3)
+        # print(json_obj)
         return json_obj
 
     def convert_csv_to_dict_list(csv):

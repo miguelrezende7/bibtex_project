@@ -11,6 +11,7 @@ class GetFromApi():
     def url_ieee(search_words):
         token = 'njjgum9jmk4unbad2jyqdn7r'
         url = f'https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext={search_words}&apikey={token}'
+        # url= https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=BIG+DATA&apikey=njjgum9jmk4unbad2jyqdn7r
         return url
 
     def get_from_api(url):

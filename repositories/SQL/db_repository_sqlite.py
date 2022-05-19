@@ -53,6 +53,10 @@ class DbRepositorySqlite(DbRepository):
         self.cursor.execute(f'DROP TABLE {table_name}')         
         self.conn.commit()
     
+    def delete_all_table_values(self,table_name):
+        self.cursor.execute(f'DELETE from {table_name}')         
+        self.conn.commit()
+    
     def list_values_from_table(self,table_name):
         pass
     

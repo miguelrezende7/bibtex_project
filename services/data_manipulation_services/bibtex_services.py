@@ -16,7 +16,7 @@ class BibtexServices():
 
         # Criando lista de arquivos Bibtex
         for valor in file_list:
-            with open(valor, encoding="mbcs") as bibtex_file:
+            with open(valor, encoding="utf-8") as bibtex_file:
                 bib_database = bibtexparser.load(bibtex_file)
                 bib_list.append(bib_database)
 

@@ -15,6 +15,7 @@ class ExportationServices():
 
             case 'json':
                 json_file=ConvertionServices.convert_object_to_json(bib_obj_list)
+                
                 ExportationServices.export_json(json_file,path)
                 print('Successful exporting to json\n')
  
@@ -59,11 +60,11 @@ class ExportationServices():
         csv_file.to_csv(exportation_folder+'csv_data.csv')
 
     def export_json(json_file,exportation_folder):
-        with open(exportation_folder+'json_data.json', 'w') as outfile:
+        with open(exportation_folder+'json_data.json', 'w',encoding='utf-8') as outfile:
             outfile.write(json_file)
 
     def export_yaml(yaml_files,exportation_folder):
-        with open(exportation_folder+'yaml_data.yaml', 'w') as outfile:
+        with open(exportation_folder+'yaml_data.yaml', 'w',encoding='utf-8') as outfile:
             outfile.write(yaml_files)
 
     def export_xml(xml_files,exportation_folder):
