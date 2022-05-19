@@ -34,12 +34,12 @@ else:
 OperationServices.add_rank_to_file_filter_and_export(yaml_file,original_df)
 
 
-db=DbRepositorySqlite('Database/bancodedados.db')
 
 # IMPORT RANKED FILE 
 ranking_export_path = yaml_file['exportation_folders']['ranking_files']
 json_file=ImportationServices.import_json(ranking_export_path)
 
+db=DbRepositorySqlite('Database/bancodedados.db')
 db.delete_table('tblFilesWithRankings')
 db.create_table()
 db.insert_values_list_json(json_file)

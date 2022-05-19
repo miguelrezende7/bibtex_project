@@ -35,7 +35,7 @@ api_search_parameters:
    
 search_options:
   source_supported_types: ['bibtex_files','api']
-  source: 'bibtex_files'
+  source: 'api'
   search_words: 'BIG DATA'
   
  
