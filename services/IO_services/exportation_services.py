@@ -7,55 +7,103 @@ class ExportationServices():
         pass
 
     def export_simple(bib_obj_list,exportation_type,path):
-        match exportation_type: 
+        
+        if  exportation_type == 'csv':
+            ConvertionServices.convert_object_to_csv_and_save(bib_obj_list, path)
+            print('Successful exporting to csv\n')
+        
+        elif exportation_type == 'json':
+            json_file=ConvertionServices.convert_object_to_json(bib_obj_list)
+            ExportationServices.export_json(json_file,path)
+            print('Successful exporting to json\n')
+        
+        elif exportation_type == 'yaml':
+            dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
+            yaml_files = ConvertionServices.convert_dict_to_yaml(dict_list)
+            ExportationServices.export_yaml(yaml_files,path)
+            print('Successful exporting to yaml\n')   
+        
+        elif exportation_type == 'xml':
+            dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
+            xml_file=ConvertionServices.convert_dict_xml(dict_list)
+            ExportationServices.export_xml(xml_file,path)
+            print('Successful exporting to xml\n')
 
-            case 'csv': 
-                ConvertionServices.convert_object_to_csv_and_save(bib_obj_list, path)
-                print('Successful exporting to csv\n')
+        else:
+            print('exportation type not found')
+        
+        
+        
+        
+        
+        # match exportation_type: 
 
-            case 'json':
-                json_file=ConvertionServices.convert_object_to_json(bib_obj_list)
+        #     case 'csv': 
+        #         ConvertionServices.convert_object_to_csv_and_save(bib_obj_list, path)
+        #         print('Successful exporting to csv\n')
+
+        #     case 'json':
+        #         json_file=ConvertionServices.convert_object_to_json(bib_obj_list)
                 
-                ExportationServices.export_json(json_file,path)
-                print('Successful exporting to json\n')
+        #         ExportationServices.export_json(json_file,path)
+        #         print('Successful exporting to json\n')
  
-            case 'yaml':
-                dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
-                yaml_files = ConvertionServices.convert_dict_to_yaml(dict_list)
-                ExportationServices.export_yaml(yaml_files,path)
-                print('Successful exporting to yaml\n')
+        #     case 'yaml':
+        #         dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
+        #         yaml_files = ConvertionServices.convert_dict_to_yaml(dict_list)
+        #         ExportationServices.export_yaml(yaml_files,path)
+        #         print('Successful exporting to yaml\n')
   
-            case 'xml':
-                dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
-                xml_file=ConvertionServices.convert_dict_xml(dict_list)
-                ExportationServices.export_xml(xml_file,path)
-                print('Successful exporting to xml\n')
+        #     case 'xml':
+        #         dict_list = ConvertionServices.convert_object_to_dict(bib_obj_list)
+        #         xml_file=ConvertionServices.convert_dict_xml(dict_list)
+        #         ExportationServices.export_xml(xml_file,path)
+        #         print('Successful exporting to xml\n')
 
     
     def export_ranking(merged,exportation_type,path):
         dict_list=ConvertionServices.convert_csv_to_dict_list(merged)
         
-        match exportation_type:
-            case 'csv': 
-                ExportationServices.export_csv(merged,path)
-                print('Successful exporting to csv\n')
+        if  exportation_type == 'csv':
+            ExportationServices.export_csv(merged,path)
+            print('Successful exporting to csv\n')
+            pass
+        elif exportation_type == 'json':
+            json_file=ConvertionServices.convert_dict_to_json(dict_list)
+            ExportationServices.export_json(json_file,path)
+            print('Successful exporting to json\n')        
+        elif exportation_type == 'yaml':
+            yaml_export_file=ConvertionServices.convert_dict_to_yaml(dict_list)
+            ExportationServices.export_yaml(yaml_export_file,path)
+            print('Successful exporting to yaml\n')        
+        elif exportation_type == 'xml':
+            xml_file=ConvertionServices.convert_dict_xml(dict_list)
+            ExportationServices.export_xml(xml_file,path)
+            print('Successful exporting to xml\n') 
 
-            case 'json':
-                json_file=ConvertionServices.convert_dict_to_json(dict_list)
-                ExportationServices.export_json(json_file,path)
-                print('Successful exporting to json\n')
+        else:
+            print('exportation type not found')
+        
+        
+        # # match exportation_type:
+        #     case 'csv': 
+        #         ExportationServices.export_csv(merged,path)
+        #         print('Successful exporting to csv\n')
+
+        #     case 'json':
+        #         json_file=ConvertionServices.convert_dict_to_json(dict_list)
+        #         ExportationServices.export_json(json_file,path)
+        #         print('Successful exporting to json\n')
  
-            case 'yaml':
-                yaml_export_file=ConvertionServices.convert_dict_to_yaml(dict_list)
-                ExportationServices.export_yaml(yaml_export_file,path)
-                print('Successful exporting to yaml\n')
+        #     case 'yaml':
+        #         yaml_export_file=ConvertionServices.convert_dict_to_yaml(dict_list)
+        #         ExportationServices.export_yaml(yaml_export_file,path)
+        #         print('Successful exporting to yaml\n')
   
-            case 'xml':   
-                xml_file=ConvertionServices.convert_dict_xml(dict_list)
-                ExportationServices.export_xml(xml_file,path)
-                print('Successful exporting to xml\n') 
-    
-    
+        #     case 'xml':   
+        #         xml_file=ConvertionServices.convert_dict_xml(dict_list)
+        #         ExportationServices.export_xml(xml_file,path)
+        #         print('Successful exporting to xml\n')    
     def export_csv(csv_file,exportation_folder):
         csv_file.to_csv(exportation_folder+'csv_data.csv')
 

@@ -1,6 +1,8 @@
 from abc import ABC,abstractclassmethod
 
 
+# usar injecao de dependencia 
+
 class DbRepository(ABC):
     def __init__(self):
         pass  

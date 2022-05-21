@@ -49,7 +49,7 @@ class GetFromApi():
             keywords = ",".join(article['index_terms']['ieee_terms']['terms'])
 
             api_dict_list.append({'author': author_name, 'title': article.get('title', 'empty'), 'keywords': keywords,
-                                  'abstract': article.get('abstract', 'empty'), 'year': article.get('publication_year', 'empty'), 'type_publication': article.get('title', 'empty'),
+                                  'abstract': article.get('abstract', 'empty'), 'year': article.get('publication_year', 'empty'), 'type_publication': 'article',
                                   'doi': article.get('doi', 'empty'), 'book_journal': article.get('publication_title', 'empty')})
 
         return api_dict_list
