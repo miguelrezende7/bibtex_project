@@ -11,7 +11,7 @@ class DataServices():
         if values['title'] != '':
             title = values['title']
             df = DataServices.filter_column_single_string(
-                'Book Title/Journal', title, df)
+                'book_journal', title, df)
 
         if values['keywords'] != ['']:
             keywords = values['keywords']
@@ -21,23 +21,23 @@ class DataServices():
         if values['abstract'] != '':
             abstract = values['abstract']
             df = DataServices.filter_column_single_string(
-                'Abstract', abstract, df)
+                'abstract', abstract, df)
 
         if values['year'] != '':
             year_equality = values['year_equality']
             year = int(values['year'])
             df = DataServices.filter_column_number(
-                'Year', year_equality, year, df)
+                'year', year_equality, year, df)
 
         if values['type_publication'] != '':
             type_publication = values['type_publication']
             df = DataServices.filter_column_single_string(
-                'Type Publication', type_publication, df)
+                'type_publication', type_publication, df)
 
         if values['doi'] != '':
             abstract = values['doi']
             df = DataServices.filter_column_single_string(
-                'DOI', abstract, df)
+                'doi', abstract, df)
 
         if values['jcr_value'] != '':
             jcr_equality = values['jcr_value_equality']
@@ -81,5 +81,6 @@ class DataServices():
         return df
 
     def add_upper_column(column, df):
-        df[column+'_UPPER'] = df[column].apply(lambda name: name.upper())
-        return df
+        df2=df.copy()
+        df2[column+'_UPPER'] = df2[column].apply(lambda name: name.upper())
+        return df2

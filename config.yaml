@@ -18,7 +18,7 @@ supported_type_equality: ['<=','<','==','>','>=','!=']
 
 filter_options:
   title: ''               # text value, '' for empty
-  keywords: ['','']                           # text values, ex: ['BIG DATA', 'ANALISYS'], [''] for empty
+  keywords: ['Business Intelligence','Big data']                           # text values, ex: ['BIG DATA', 'ANALISYS'], [''] for empty
   abstract: ''                             # text value, '' for empty
   year_equality: '>'                       # equality value in ['<=','<','==','>','>=','!=']
   year: ''                             # int value, ex: 2019, '' for empty

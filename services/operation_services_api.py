@@ -6,13 +6,51 @@ from services.convertion_services import ConvertionServices
 from services.data_manipulation_services.data_services import DataServices
 from services.data_manipulation_services.etl_services import Etl
 from services.data_manipulation_services.yaml_services import YamlServices
+from services.operation_services import OperationServices
 
 
-class OperationServices():
+class OperationServicesApi():
     def __init__(self):
-        pass
+       pass
+        
+      
      
+    def process_api(*args):
+        dados=args[0]
+        yaml_file = ImportationServices.import_yaml_config()    
+        yaml_file=ConvertionServices.convert_json_api_to_yaml(dados,yaml_file)
+        source =yaml_file['search_options']['source']
+        # GETTING SOURCE FILE 
+        if source=='bibtex_files':
+            # print('entrou no source bibtex')
+            bib_obj_list=args[1]
+            bib_dict=ConvertionServices.convert_object_to_dict(bib_obj_list)
+            original_df =pd.DataFrame(bib_dict)
+            
+            
+            df=OperationServices.add_rank_to_file_filter_and_return_json(yaml_file,original_df)
+            # print(df)          
+            
+            return df.to_dict(orient="records")
+            
 
+            # IMPLEMENT BIBTEX 
+            # OperationServices.import_bibtext_from_file_and_export(yaml_file)
+            # GETTING FILE FROM BIBTEXT EXPORTED 
+            # original_df = ImportationServices.read_csv_file(f'{csv_importing_path}csv_data.csv')
+            pass
+        else:
+            # GETTING FILE FROM API 
+            original_df=OperationServices.import_from_api(yaml_file)
+            
+            
+            # ADD RANKING (SCI AND JCS TO IMPORTED FILE) AND EXPORT
+            df=OperationServices.add_rank_to_file_filter_and_return_json(yaml_file,original_df)
+            
+            return df.to_dict(orient="records")
+            # print(df.to_json(indent=3,orient="records"))
+        
+    
     def import_bibtext_from_file_and_export(yaml_file):
 
         exportation_type_simple = yaml_file['exportation_type']['simple']
@@ -56,9 +94,23 @@ class OperationServices():
         sci = ImportationServices.read_csv_file(f'{ranking_import_path}scimagojr 2020.csv')
         jcs = ImportationServices.read_csv_file(f'{ranking_import_path}jcs_2020.csv')
 
+
+        # source =yaml_file['search_options']['source']
+
+        # if source=='api':
+            
+        #     original_df=import_from_api(yaml_file)
+            
+        # else:
+            
+        #     csv_importing_path = yaml_file['exportation_folders']['simple_files']
+        #     original_df = ImportationServices.read_csv_file(f'{csv_importing_path}csv_data.csv')
+        
+
         # # SCI ETL
         sci=Etl.sci_etl(sci)
         # # print(sci)
+
 
         # # JCS ETL
         jcs=Etl.jcr_etl(jcs)
@@ -87,47 +139,4 @@ class OperationServices():
         ranking_export_path = yaml_file['exportation_folders']['ranking_files']
         ExportationServices.export_ranking(merged,exportation_type_ranking,ranking_export_path)
 
-    def add_rank_to_file_filter_and_return_json(yaml_file,original_df):
-         # VALIDATE YAML FILTER AND EXPORTATION TYPE (RANKING)
-        yaml_file = YamlServices.filter_validation(yaml_file)
-
-        # OPEN CSV FILES
-        ranking_import_path = yaml_file['importation_folders']['ranking_files']
-        sci = ImportationServices.read_csv_file(f'{ranking_import_path}scimagojr 2020.csv')
-        jcs = ImportationServices.read_csv_file(f'{ranking_import_path}jcs_2020.csv')
-
-        # # SCI ETL
-        sci=Etl.sci_etl(sci)
-        # # print(sci)
-
-        # # JCS ETL
-        jcs=Etl.jcr_etl(jcs)
-        # # print(jcs)
-
-        # # CSV ETL
-        # print(original_df)
-        original_df=Etl.create_upper_title(original_df,'book_journal')
-        # print(original_df)
-        # print('entrou nesse')
-
-        # # MERGING AND ETL
-        merged = Etl.merge_etl(sci,jcs,original_df)
-        
-
-
-        # # APPLY FILTERS
-        # print(f'Shape before filtering: {merged.shape}')
-        merged=DataServices.filter_values(yaml_file['filter_options'],merged)
-
-        return merged
-    
-    def import_from_api(yaml_file):
-        search_words=yaml_file['search_options']['search_words']
-        url=GetFromApi.url_ieee(search_words)
-        # print(url)
-        json_file=GetFromApi.get_from_api(url)
-        # print(json_file)
-        dict_ieee_formated=GetFromApi.formated_ieee_dict_from_api(json_file)
-        # print(dict_ieee_formated)
-        df =pd.DataFrame(dict_ieee_formated)
-        return df
+  

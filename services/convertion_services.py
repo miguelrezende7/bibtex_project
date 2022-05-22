@@ -29,7 +29,7 @@ class ConvertionServices():
         # print(list(filter(lambda x:'Maria' in x.author, obj_list)))
         dict_list=[]
         for valor in obj_list:
-            dict_list.append({'author':valor.author,'title':valor.title,'keywords':valor.keywords,'abstract':valor.abstract,'year':valor.year,'type_publication':valor.type_publication,'doi':valor.doi,'book_title':valor.book_journal})
+            dict_list.append({'author':valor.author,'title':valor.title,'keywords':valor.keywords,'abstract':valor.abstract,'year':valor.year,'type_publication':valor.type_publication,'doi':valor.doi,'book_journal':valor.book_journal})
         
         
         return dict_list
@@ -39,6 +39,27 @@ class ConvertionServices():
         # print(json_obj)
         return json_obj
 
+    def convert_json_api_to_yaml(json_file,yaml_file):
+        
+        yaml_file['filter_options']['title']=json_file['title']
+        yaml_file['filter_options']['keywords']=json_file['keywords'].split(',')
+        yaml_file['filter_options']['abstract']=json_file['abstract']
+        yaml_file['filter_options']['year_equality']=json_file['year_equality']
+        yaml_file['filter_options']['year']=json_file['year']
+        yaml_file['filter_options']['type_publication']=json_file['type_publication']
+        yaml_file['filter_options']['doi']=json_file['doi']
+        yaml_file['filter_options']['jcr_value_equality']=json_file['jcr_value_equality']
+        yaml_file['filter_options']['jcr_value']=json_file['jcr_value']
+        yaml_file['filter_options']['scimago_value_equality']=json_file['scimago_value_equality']
+        yaml_file['filter_options']['scimago_value']=json_file['scimago_value']
+
+        yaml_file['search_options']['source']=json_file['source']
+        yaml_file['search_options']['search_words']=json_file['search_words']
+        
+        # print(yaml_file['filter_options'])
+        # print(yaml_file['search_options'])
+        return yaml_file
+            
     def convert_csv_to_dict_list(csv):
         dict_file = csv.to_dict(orient='records')
         return dict_file

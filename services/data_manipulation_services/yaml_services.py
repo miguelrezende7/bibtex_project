@@ -46,15 +46,15 @@ class YamlServices():
         type_publication_list=yaml_file['supported_type_publication']
         yaml_file['filter_options']['type_publication']=YamlServices.type_publication_validation(type_publication,type_publication_list)
 
-        print('Filters to be applied are:\n')
+        # print('Filters to be applied are:\n')
         
-        for key,value in yaml_file['filter_options'].items():
+        # for key,value in yaml_file['filter_options'].items():
         
-           print(f'{key}: {value}')
-        print()
+        #    print(f'{key}: {value}')
+        # print()
         exportation_type=yaml_file['exportation_type']['ranking']
-        print(f'exportation type (ranking): {exportation_type}')
-        print()
+        # print(f'exportation type (ranking): {exportation_type}')
+        # print()
 
         return yaml_file
 
