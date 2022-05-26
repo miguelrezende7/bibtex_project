@@ -2,75 +2,14 @@ import bibtexparser
 from flask_restful import Api, Resource, reqparse
 from flask import Flask, request
 import werkzeug
-
 from werkzeug.datastructures import FileStorage
 from services.convertion_services import ConvertionServices
-
 from services.operation_services_api import OperationServicesApi
 
-
-# def normalize_path_params(source='api',
-#                           search_words='BIG DATA',
-#                           title='',
-#                           keywords='',
-#                           year_equality='',
-#                           year='',
-#                           type_publication='',
-#                           jcr_value_equality='',
-#                           jcr_value='',
-#                           scimago_value_equality='',
-#                           scimago_value='', **dados
-#                           ):
-#     return {
-#         'source': source,
-#         'search_words': search_words,
-#         'title': title,
-#         'keywords': keywords,
-#         'year_equality': year_equality,
-#         'year': year,
-#         'type_publicati`
-#         on': type_publication,
-#         'jcr_value_equality': jcr_value_equality,
-#         'jcr_value': jcr_value,
-#         'scimago_value_equality': scimago_value_equality,
-#         'scimago_value': scimago_value,
-#     }
-
-
-# path_params = reqparse.RequestParser()
-# path_params.add_argument('source', type=str, location='args')
-# path_params.add_argument('search_words', type=str, location='args')
-# path_params.add_argument('title', type=str, location='args')
-# path_params.add_argument('keywords', type=str, location='args')
-# path_params.add_argument('year_equality', type=str, location='args')
-# path_params.add_argument('year', type=str, location='args')
-# path_params.add_argument('type_publication', type=str, location='args')
-# path_params.add_argument('jcr_value_equality', type=str, location='args')
-# path_params.add_argument('jcr_value', type=str, location='args')
-# path_params.add_argument('scimago_value_equality', type=str, location='args')
-# path_params.add_argument('scimago_value', type=str, location='args')
 
 
 class BibtexApi(Resource):
     
-    path_params = reqparse.RequestParser()
-    path_params.add_argument('source',type='str',location='args')
-    # path_params.add_argument('search_words')
-    # path_params.add_argument('title')
-    # path_params.add_argument('keywords')
-    # path_params.add_argument('abstract')
-    # path_params.add_argument('year_equality')
-    # path_params.add_argument('year')
-    # path_params.add_argument('type_publication')
-    # path_params.add_argument('doi')
-    # path_params.add_argument('jcr_value_equality')
-    # path_params.add_argument('jcr_value')
-    # path_params.add_argument('scimago_value_equality')
-    # path_params.add_argument('scimago_value')
-
-
-
-
     def get(self):
         print('\n\n\n')
         path_params = reqparse.RequestParser()
@@ -83,15 +22,12 @@ class BibtexApi(Resource):
         path_params.add_argument('year',type=str,default='',location='args')
         path_params.add_argument('type_publication',type=str,default='article',location='args')
         path_params.add_argument('doi',type=str,default='',location='args')
-        path_params.add_argument('jcr_value_equality',type=str,default='',location='args')
+        path_params.add_argument('jcr_value_equality',type=str,default='==',location='args')
         path_params.add_argument('jcr_value',type=str,default='',location='args')
-        path_params.add_argument('scimago_value_equality',type=str,default='',location='args')
+        path_params.add_argument('scimago_value_equality',type=str,default='==',location='args')
         path_params.add_argument('scimago_value',type=str,default='',location='args')
         dados=path_params.parse_args()
         
-    
-
-
         if dados['source']=='api':
             
             valor=OperationServicesApi.process_api(dados)
